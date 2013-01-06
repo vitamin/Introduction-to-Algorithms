@@ -43,17 +43,6 @@ def insert_sort(arr):
     pass
 ALL.append(insert_sort);
 
-def t_sort(arr):
-    """ just for test
-    """
-    #return [2,32,3];
-    #return [1,2,3,4,5,6];
-    _arr=list(arr);
-    _arr.sort(); 
-    return _arr
-    pass;
-ALL.append(t_sort);
-
 def merge(arr,p,q,r):
     """ for merge sort
         arr should be a list
@@ -109,6 +98,57 @@ def merge_sort(arr):
 
 ALL.append(merge_sort);
 
+def exchange(arr,i,j):
+    temp=arr[i];
+    arr[i]=arr[j];
+    arr[j]=temp;
+    pass;
+
+def partition(arr,q,r):
+    _x=arr[r-1];
+    i=q-1;
+    for j in range(q,r):
+        if arr[j]<_x:
+            i+=1;
+            exchange(arr,i,j);
+
+    exchange(arr,i+1,r-1);
+
+    return i+1;
+    pass
+
+def _quick_sort(arr,q,r):
+    if (q<r-1):
+        p=partition(arr,q,r);
+        _quick_sort(arr,q,p);
+        _quick_sort(arr,p+1,r);
+        pass;
+    elif(r-1==q):
+        partition(arr,q,r);
+    pass;
+
+def quick_sort(arr):
+    """ quick sort
+    """
+    _arr=list(arr);
+    _quick_sort(_arr,0,len(_arr));
+    return _arr
+    pass;
+
+ALL.append(quick_sort);
+
+def t_sort(arr):
+    """ just for test
+    """
+    #return [2,32,3];
+    #return [1,2,3,4,5,6];
+    _arr=list(arr);
+    _arr.sort(); 
+    return _arr
+    pass;
+ALL.append(t_sort);
+
+
 if(__name__=="__main__"):
 
     """
@@ -133,6 +173,22 @@ if(__name__=="__main__"):
     print "m_int=",m_int
     """
 
+    #"""
+    #test for quick sort 
+    #m=(1,3,5,2,4,6)
+    m=[2,8,7,1,3,5,6,4]
+    print "m=",m
+
+    #m_int=partition(m,0,len(m))
+    #m_int=_quick_sort(m,0,len(m))
+    m_int=quick_sort(m)
+
+    print "after sort:"
+    print "m=",m
+    print "m_int =",m_int
+    print "first partition should be:",[2,1,3,4,7,5,6,8];
+    #"""
+
     print "Wait for 3 seconds..."
-    sleep(3)#停下来看清信息
+    sleep(3)# stop for check
     #os.system('pause')
